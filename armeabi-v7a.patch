@@ -1,0 +1,100 @@
+diff --git a/CopyLibs2Public4Android.sh b/CopyLibs2Public4Android.sh
+index 2d549a9..7d772b2 100755
+--- a/CopyLibs2Public4Android.sh
++++ b/CopyLibs2Public4Android.sh
+@@ -1,12 +1,12 @@
+ #!/bin/sh
+-mkdir -p ../gpac_public/extra_lib/lib/android/armeabi
+-cp -rav lib/android/armeabi/*.so ../gpac_public/extra_lib/lib/android/armeabi
+-cp -rav lib/android/armeabi/*.a ../gpac_public/extra_lib/lib/android/armeabi
++#mkdir -p ../gpac_public/extra_lib/lib/android/armeabi
++#cp -rav lib/android/armeabi/*.so ../gpac_public/extra_lib/lib/android/armeabi
++#cp -rav lib/android/armeabi/*.a ../gpac_public/extra_lib/lib/android/armeabi
+ mkdir -p ../gpac_public/extra_lib/lib/android/armeabi-v7a
+ cp -rav lib/android/armeabi-v7a/*.so ../gpac_public/extra_lib/lib/android/armeabi-v7a
+ cp -rav lib/android/armeabi-v7a/*.a ../gpac_public/extra_lib/lib/android/armeabi-v7a
+-mkdir -p ../gpac_public/extra_lib/lib/android/x86
+-cp -rav lib/android/x86/*.so ../gpac_public/extra_lib/lib/android/x86
+-cp -rav lib/android/x86/*.a ../gpac_public/extra_lib/lib/android/x86
++#mkdir -p ../gpac_public/extra_lib/lib/android/x86
++#cp -rav lib/android/x86/*.so ../gpac_public/extra_lib/lib/android/x86
++#cp -rav lib/android/x86/*.a ../gpac_public/extra_lib/lib/android/x86
+ mkdir -p ../gpac_public/applications/osmo4_android/libs
+ cp -fv ./real3d.jar ../gpac_public/applications/osmo4_android/libs
+diff --git a/build/android/build_ffmpeg4.sh b/build/android/build_ffmpeg4.sh
+index d80d953..836322d 100755
+--- a/build/android/build_ffmpeg4.sh
++++ b/build/android/build_ffmpeg4.sh
+@@ -39,7 +39,7 @@ if [ "$DEST" = "" ]; then
+ 	DEST=$ROOT_DIR/build/stagefright
+ fi
+ 
+-for ABI in "armeabi-v7a" "armeabi" "x86"; do
++for ABI in "armeabi-v7a"; do
+ 	if [ "$ABI" = "x86" ]; then
+ 		ARCH="x86"
+ 		TOOLCHAIN=`echo $NDK/toolchains/x86-4.9/prebuilt/*-x86*`
+diff --git a/build/android/build_nghttp2.sh b/build/android/build_nghttp2.sh
+index 95ac1d4..2066270 100755
+--- a/build/android/build_nghttp2.sh
++++ b/build/android/build_nghttp2.sh
+@@ -16,7 +16,7 @@ NGHTTP2="${PWD}"
+ 
+ autoreconf -i
+ 
+-for ABI in "armeabi-v7a" "armeabi" "x86"; do
++for ABI in "armeabi-v7a"; do
+ 
+     PREFIX=${NGHTTP2}/android/${ABI}
+     DEST="../build/android/libs/$ABI"
+diff --git a/build/android/gpac_build_all_extra_libs b/build/android/gpac_build_all_extra_libs
+index 5d4c403..4b6c520 100755
+--- a/build/android/gpac_build_all_extra_libs
++++ b/build/android/gpac_build_all_extra_libs
+@@ -21,16 +21,16 @@ mkdir -p ../../lib/android
+ cd ../../lib/android
+ LIBPATH=$(pwd)
+ 
+-mkdir -p $LIBPATH/armeabi
++#mkdir -p $LIBPATH/armeabi
+ mkdir -p $LIBPATH/armeabi-v7a
+-mkdir -p $LIBPATH/x86
++#mkdir -p $LIBPATH/x86
+ 
+-cd armeabi/
+-rm -f *.so
+-cd ../armeabi-v7a
+-rm -f *.so
+-cd ../x86
++#cd armeabi/
++#rm -f *.so
++cd armeabi-v7a
+ rm -f *.so
++#cd ../x86
++#rm -f *.so
+ 
+ cd ../../../build/android/jni
+ echo "Building extra libs for GPAC Android..."
+diff --git a/build/android/jni/Application.mk b/build/android/jni/Application.mk
+index cb324d9..8238acb 100644
+--- a/build/android/jni/Application.mk
++++ b/build/android/jni/Application.mk
+@@ -1,4 +1,4 @@
+-APP_ABI := armeabi armeabi-v7a x86
++APP_ABI := armeabi-v7a
+ APP_OPTIM := release
+ APP_STL := stlport_shared
+ APP_MODULES := libz libfaad libft2 libjpegdroid editline libjs_osmo libopenjpeg libpng libmad libavcodec libavformat libswscale libavutil libavfilter libavdevice libwsresample stlport_shared
+diff --git a/libaom/build_libaom_android.sh b/libaom/build_libaom_android.sh
+index 4b0eaea..ceddf28 100755
+--- a/libaom/build_libaom_android.sh
++++ b/libaom/build_libaom_android.sh
+@@ -14,7 +14,7 @@ git checkout cf38e96db7664ae82d8d67287fa0c4a60b44473b
+ cd ..
+ 
+ 
+-ABIS="armeabi-v7a x86"
++ABIS="armeabi-v7a"
+ 
+ 
+ for ABI in $ABIS ; do
